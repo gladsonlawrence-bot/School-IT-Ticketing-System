@@ -39,10 +39,27 @@ export interface CustomField {
   required: boolean;
 }
 
+export interface EmailConfig {
+  smtpHost: string;
+  smtpPort: string;
+  senderEmail: string;
+  senderName: string;
+  authEnabled: boolean;
+}
+
+export interface NotificationPreferences {
+  notifyOnCreation: boolean;
+  notifyOnStatusChange: boolean;
+  notifyOnAssignment: boolean;
+  notifyOnResolution: boolean;
+}
+
 export interface AppSettings {
   themeColor: string;
   categories: string[];
   customFields: CustomField[];
+  emailConfig: EmailConfig;
+  notifications: NotificationPreferences;
 }
 
 export interface User {
