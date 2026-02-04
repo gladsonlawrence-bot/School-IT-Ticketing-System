@@ -5,7 +5,7 @@ import {
   Role, User, Ticket, TicketStatus, Priority, 
   RequesterType, GRADES, SECTIONS, AppSettings, FieldType, CustomField 
 } from './types';
-import { db } from './services/mockDb';
+import { db } from './services/mock-Db';
 import { 
   DashboardIcon, TicketIcon, UsersIcon, LogoutIcon, 
   PlusIcon, SearchIcon, CheckIcon
