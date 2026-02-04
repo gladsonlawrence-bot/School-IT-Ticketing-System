@@ -1,0 +1,7 @@
+{
+  "name": "School IT Support Ticketing System",
+  "description": "A comprehensive IT ticketing solution for schools with a simplified teacher submission portal and a robust admin/staff dashboard.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
