@@ -27,6 +27,7 @@ const DEFAULT_SETTINGS: AppSettings = {
 const DEFAULT_USERS: User[] = [
   { id: '1', name: 'Gladson Lawrence', email: 'gladson.lawrence@gmis.sch.id', role: Role.ADMIN, password: 'password' },
   { id: '2', name: 'John Tech', email: 'john@school.edu', role: Role.SUPPORT, password: 'password' },
+  { id: '3', name: 'Sara Coord', email: 'sara@school.edu', role: Role.COORDINATOR, password: 'password' },
 ];
 
 export const db = {
