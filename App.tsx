@@ -163,12 +163,14 @@ const TicketForm = ({ isManual = false, onComplete, setGlobalToast }: { isManual
   const [formData, setFormData] = useState<any>({
     name: '', email: '', title: '', category: settings.categories[0],
     description: '', priority: Priority.MEDIUM, requesterType: RequesterType.TEACHER,
-    grade: GRADES[0], section: SECTIONS[0], customData: {}
+    grade: GRADES[0], section: SECTIONS[0], customData: {},
+    studentName: '' // Initialize student name
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [ticketId, setTicketId] = useState('');
 
   const showGradeSection = [RequesterType.STUDENT, RequesterType.PARENT].includes(formData.requesterType);
+  const showStudentName = formData.requesterType === RequesterType.PARENT;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -234,6 +236,13 @@ const TicketForm = ({ isManual = false, onComplete, setGlobalToast }: { isManual
                 <input required className="w-full px-5 py-3 lg:px-6 lg:py-4 bg-slate-50 border border-slate-100 rounded-2xl font-bold text-sm outline-none placeholder-slate-300" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="John Doe" />
               </div>
             </div>
+
+            {showStudentName && (
+              <div className="space-y-2 animate-in slide-in-from-top-4">
+                <label className="text-[9px] lg:text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Student Name</label>
+                <input required className="w-full px-5 py-3 lg:px-6 lg:py-4 bg-slate-50 border border-slate-100 rounded-2xl font-bold text-sm outline-none placeholder-slate-300" value={formData.studentName} onChange={e => setFormData({...formData, studentName: e.target.value})} placeholder="e.g. Jane Doe" />
+              </div>
+            )}
 
             {showGradeSection && (
               <div className="grid grid-cols-2 gap-6 lg:gap-10 animate-in slide-in-from-top-4">
@@ -624,7 +633,7 @@ const ToggleOption = ({ label, active, onClick }: { label: string, active: boole
   </div>
 );
 
-const Modal = ({ title, children, onClose }: { title: string, children: React.ReactNode, onClose: () => void }) => (
+const Modal = ({ title, children, onClose }: { title: string, children?: React.ReactNode, onClose: () => void }) => (
   <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 lg:p-6 bg-slate-900/40 backdrop-blur-xl animate-in fade-in duration-300 overflow-y-auto">
     <div className="bg-white w-full max-w-2xl rounded-[40px] lg:rounded-[64px] shadow-[0_40px_100px_rgba(0,0,0,0.2)] overflow-hidden animate-in zoom-in-95 duration-300 my-auto">
       <div className="px-8 lg:px-14 py-8 lg:py-12 border-b flex justify-between items-center bg-slate-50/30">
@@ -820,6 +829,11 @@ const StaffTicketDetail = ({ setGlobalToast }: any) => {
              <h3 className="text-[10px] font-black uppercase text-slate-300 tracking-[0.3em]">Core Meta</h3>
              <div className="space-y-8">
                 <div><p className="text-[8px] lg:text-[9px] font-black text-slate-300 uppercase mb-2">Requester</p><p className="text-lg lg:text-xl font-black text-slate-900">{ticket.createdBy.name}</p></div>
+                
+                {ticket.studentName && (
+                   <div><p className="text-[8px] lg:text-[9px] font-black text-slate-300 uppercase mb-2">Student Name</p><p className="text-lg lg:text-xl font-black text-slate-900">{ticket.studentName}</p></div>
+                )}
+
                 <div><p className="text-[8px] lg:text-[9px] font-black text-slate-300 uppercase mb-2">Queue</p><p className="text-lg lg:text-xl font-black text-slate-900">{ticket.category}</p></div>
                 <div><p className="text-[8px] lg:text-[9px] font-black text-slate-300 uppercase mb-2">Submission Date</p><p className="text-xs font-bold text-slate-400">{new Date(ticket.createdAt).toLocaleString()}</p></div>
              </div>

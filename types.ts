@@ -1,8 +1,8 @@
 
 export enum Role {
-  ADMIN = 'ADMIN',
-  SUPPORT = 'SUPPORT',
-  TEACHER = 'TEACHER'
+  ADMIN = 'Admin',
+  SUPPORT = 'IT Support Staff',
+  COORDINATOR = 'Coordinator'
 }
 
 export enum RequesterType {
@@ -80,6 +80,7 @@ export interface Ticket {
   requesterType: RequesterType;
   grade?: string;
   section?: string;
+  studentName?: string;
   createdBy: {
     name: string;
     email: string;
